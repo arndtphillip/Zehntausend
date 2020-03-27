@@ -53,7 +53,9 @@ public class NewGameActivity extends AppCompatActivity {
     /** starts the game with the entered players */
     public void startGame(View view) {
         Intent intent = new Intent(this, GameActivity.class);
-        //intent.putStringArrayListExtra(EXTRA_PLAYERS, players);
+        Bundle bundle = new Bundle();
+        bundle.putParcelableArrayList(EXTRA_PLAYERS, players);
+        intent.putExtras(bundle);
         startActivity(intent);
     }
 }
