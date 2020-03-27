@@ -35,7 +35,10 @@ public class PlayerNameAdapter extends RecyclerView.Adapter<PlayerNameAdapter.Pl
     public void onBindViewHolder(@NonNull PlayerNameViewHolder holder, int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-        holder.textView.setText(players.get(position).getName());
+        Player player = players.get(position);
+
+        holder.playerIdText.setText(String.format("%d", player.getId()));
+        holder.playerNameText.setText(player.getName());
     }
 
     @Override
@@ -48,10 +51,13 @@ public class PlayerNameAdapter extends RecyclerView.Adapter<PlayerNameAdapter.Pl
     // you provide access to all the views for a data item in a view holder
     public static class PlayerNameViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
-        public TextView textView;
+        public TextView playerIdText;
+        public TextView playerNameText;
+
         public PlayerNameViewHolder(final View v) {
             super(v);
-            textView = (TextView) v.findViewById(R.id.playerName);
+            playerIdText = (TextView) v.findViewById(R.id.playerId);
+            playerNameText = (TextView) v.findViewById(R.id.playerName);
         }
     }
 
