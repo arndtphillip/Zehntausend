@@ -1,25 +1,42 @@
 package com.parndt.zehntausend.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
 import com.parndt.zehntausend.R;
+import com.parndt.zehntausend.adapters.PlayerNameAdapter;
 import com.parndt.zehntausend.model.Player;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class NewGameActivity extends AppCompatActivity {
 
-    private List<Player> players = new ArrayList<>();
+    public static final String EXTRA_PLAYERS = "com.parndt.zehntausend.PLAYERS";
+
+    private RecyclerView recyclerView;
+    private RecyclerView.Adapter adapter;
+    private RecyclerView.LayoutManager layoutManager;
+
+    private ArrayList<Player> players = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_game);
+        recyclerView = (RecyclerView) findViewById(R.id.playerListView);
+
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+
+        // specify an adapter (see also next example)
+        adapter = new PlayerNameAdapter(players);
+        recyclerView.setAdapter(adapter);
     }
 
     /** adds a new player */
@@ -27,9 +44,16 @@ public class NewGameActivity extends AppCompatActivity {
         EditText playerText = (EditText) findViewById(R.id.playerName);
         String playerName = playerText.getText().toString();
 
-        Player player = new Player(playerName);
-        players.add(player);
+        players.add(new Player(playerName));
+        adapter.notifyDataSetChanged();
 
         playerText.getText().clear();
+    }
+
+    /** starts the game with the entered players */
+    public void startGame(View view) {
+        Intent intent = new Intent(this, GameActivity.class);
+        //intent.putStringArrayListExtra(EXTRA_PLAYERS, players);
+        startActivity(intent);
     }
 }
