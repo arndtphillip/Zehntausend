@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 
 import com.parndt.zehntausend.R;
@@ -19,9 +20,7 @@ public class NewGameActivity extends AppCompatActivity {
 
     public static final String EXTRA_PLAYERS = "com.parndt.zehntausend.PLAYERS";
 
-    private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
-    private RecyclerView.LayoutManager layoutManager;
 
     private ArrayList<Player> players = new ArrayList<>();
 
@@ -29,9 +28,9 @@ public class NewGameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_game);
-        recyclerView = (RecyclerView) findViewById(R.id.playerListView);
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.playerListView);
 
-        layoutManager = new LinearLayoutManager(this);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
         // specify an adapter (see also next example)

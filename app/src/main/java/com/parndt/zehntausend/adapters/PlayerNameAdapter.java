@@ -3,6 +3,7 @@ package com.parndt.zehntausend.adapters;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -32,13 +33,21 @@ public class PlayerNameAdapter extends RecyclerView.Adapter<PlayerNameAdapter.Pl
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PlayerNameViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull PlayerNameViewHolder holder, final int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
         Player player = players.get(position);
 
         holder.playerIdText.setText(String.format("%d", player.getId()));
         holder.playerNameText.setText(player.getName());
+
+        holder.deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                players.remove(position);
+                notifyDataSetChanged();
+            }
+        });
     }
 
     @Override
@@ -49,15 +58,17 @@ public class PlayerNameAdapter extends RecyclerView.Adapter<PlayerNameAdapter.Pl
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
     // you provide access to all the views for a data item in a view holder
-    public static class PlayerNameViewHolder extends RecyclerView.ViewHolder {
+    static class PlayerNameViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
-        public TextView playerIdText;
-        public TextView playerNameText;
+        TextView playerIdText;
+        TextView playerNameText;
+        Button deleteButton;
 
-        public PlayerNameViewHolder(final View v) {
+        PlayerNameViewHolder(final View v) {
             super(v);
             playerIdText = (TextView) v.findViewById(R.id.playerId);
             playerNameText = (TextView) v.findViewById(R.id.playerName);
+            deleteButton = (Button) v.findViewById(R.id.deletePlayerButton);
         }
     }
 
