@@ -18,4 +18,10 @@ public class GameState {
 
         playerTurns++;
     }
+
+    public void undo() {
+        // find last turn
+        int player = --playerTurns % scores.size();
+        scores.get(player).undo();
+    }
 }

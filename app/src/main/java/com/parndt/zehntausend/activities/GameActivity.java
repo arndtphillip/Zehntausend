@@ -58,4 +58,10 @@ public class GameActivity extends AppCompatActivity {
 
         pointsText.getText().clear();
     }
+
+    /** reverts the last move */
+    public void undo(View view) {
+        state.undo();
+        scoreAdapter.notifyDataSetChanged();
+    }
 }

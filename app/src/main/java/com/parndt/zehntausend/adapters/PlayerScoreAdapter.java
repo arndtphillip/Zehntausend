@@ -34,27 +34,62 @@ public class PlayerScoreAdapter extends RecyclerView.Adapter<PlayerScoreAdapter.
     @Override
     public void onBindViewHolder(@NonNull PlayerScoreViewHolder holder, int position) {
         if (position < players.size()) {
-            String name = players.get(position).getPlayer().getName();
-
-            holder.scoreText.setText(name);
-            holder.scoreText.setTypeface(null, Typeface.BOLD);
+            renderHeader(holder, position);
         } else {
             position -= players.size();
+            int turnCount = players.get(0).getPoints().size() * players.size();
 
-            PlayerScore player = players.get(position % players.size());
-            int points = player.getPoints().get((int) Math.floor(position / (double) players.size()));
-
-            holder.scoreText.setText(String.format("%d", points));
+            if (position < turnCount) {
+                renderScore(holder, position);
+            } else {
+                position -= turnCount;
+                renderScoreSum(holder, position);
+            }
         }
+    }
+
+    private void renderHeader(@NonNull PlayerScoreViewHolder holder, int position) {
+        String name = players.get(position).getPlayer().getName();
+
+        holder.scoreText.setText(name);
+        holder.scoreText.setTypeface(null, Typeface.BOLD);
+    }
+
+    private void renderScore(@NonNull PlayerScoreViewHolder holder, int position) {
+        PlayerScore player = players.get(position % players.size());
+        int playerPointsPosition = (int) Math.floor(position / (double) players.size());
+        List<Integer> playerPoints = player.getPoints();
+
+        if (playerPointsPosition < playerPoints.size()) {
+            // player points available
+            int points = playerPoints.get(playerPointsPosition);
+
+            if (points != 0) {
+                holder.scoreText.setText(String.format("%d", points));
+            } else {
+                holder.scoreText.setText(" - ");
+            }
+        } else {
+            // no points in this round yet
+            holder.scoreText.setText("");
+        }
+
+        holder.scoreText.setTypeface(null);
+    }
+
+    private void renderScoreSum(@NonNull PlayerScoreViewHolder holder, int position) {
+        int sum = players.get(position).getPointsSum();
+        holder.scoreText.setText(String.format("%d", sum));
+        holder.scoreText.setTypeface(null, Typeface.BOLD);
     }
 
     @Override
     public int getItemCount() {
-        int count = players.size();
-        for (PlayerScore player : players) {
-            count += player.getPoints().size();
-        }
-        return count;
+        int playerCount = players.size();
+        int playerTurnCount = players.get(0).getPoints().size();
+        int playerSumCount = players.size();
+
+        return playerCount + playerTurnCount * players.size() + playerSumCount;
     }
 
     // Provide a reference to the views for each data item
