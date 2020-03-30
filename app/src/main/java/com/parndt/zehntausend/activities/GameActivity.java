@@ -50,7 +50,7 @@ public class GameActivity extends AppCompatActivity {
         scoreAdapter = new PlayerScoreAdapter(players);
         scoreRecyclerView.setAdapter(scoreAdapter);
 
-        setCurrentPlayerHint();
+        dataChanged();
     }
 
     /** adds new points to the player scores */
@@ -60,8 +60,7 @@ public class GameActivity extends AppCompatActivity {
         try {
             state.addScore(Integer.parseInt(pointsText.getText().toString()));
 
-            scoreAdapter.notifyDataSetChanged();
-            setCurrentPlayerHint();
+            dataChanged();
 
             // scroll to bottom
             ScrollView scroll = (ScrollView) view.findViewById(R.id.scoreScrollView);
@@ -74,13 +73,16 @@ public class GameActivity extends AppCompatActivity {
     /** reverts the last move */
     public void undo(View view) {
         state.undo();
-        scoreAdapter.notifyDataSetChanged();
-        setCurrentPlayerHint();
+        dataChanged();
     }
 
-    private void setCurrentPlayerHint() {
+    private void dataChanged() {
+        scoreAdapter.notifyDataSetChanged();
+
         EditText pointsText = (EditText) findViewById(R.id.pointsText);
         pointsText.getText().clear();
         pointsText.setHint(state.getCurrentPlayer().getName());
+
+        state.save(getApplicationContext());
     }
 }

@@ -1,5 +1,9 @@
 package com.parndt.zehntausend.model;
 
+import android.content.Context;
+
+import com.parndt.zehntausend.data.ScoreSaver;
+
 import java.util.List;
 
 public class GameState {
@@ -30,5 +34,9 @@ public class GameState {
     public Player getCurrentPlayer() {
         int player = playerTurns % scores.size();
         return scores.get(player).getPlayer();
+    }
+
+    public void save(Context context) {
+        new ScoreSaver(scores).save(context);
     }
 }
