@@ -29,7 +29,7 @@
         android:id="@+id/GameActions"
         android:layout_width="0dp"
         android:layout_height="96dp"
-        android:backgroundTint="#000000"
+        android:background="@color/colorPrimaryDark"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -41,6 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
+            android:backgroundTint="@color/colorPrimary"
             android:contentDescription="@string/undo"
             android:onClick="undo"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -48,7 +49,7 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_undo_red_24dp" />
+            app:srcCompat="@drawable/ic_undo" />
 
         <EditText
             android:id="@+id/pointsText"
@@ -73,6 +74,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
+            android:backgroundTint="@color/colorPrimary"
             android:contentDescription="@string/add"
             android:onClick="addScore"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -80,7 +82,7 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/pointsText"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_add_circle_green_24dp" />
+            app:srcCompat="@drawable/ic_add_circle" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
