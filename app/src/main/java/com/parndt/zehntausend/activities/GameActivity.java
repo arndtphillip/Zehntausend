@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ScrollView;
 
 import com.parndt.zehntausend.R;
 import com.parndt.zehntausend.adapters.PlayerScoreAdapter;
@@ -27,6 +28,7 @@ public class GameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+
         RecyclerView scoreRecyclerView = (RecyclerView) findViewById(R.id.tableScores);
 
         Bundle extras = getIntent().getExtras();
@@ -57,6 +59,10 @@ public class GameActivity extends AppCompatActivity {
         scoreAdapter.notifyDataSetChanged();
 
         pointsText.getText().clear();
+
+        // scroll to bottom
+        ScrollView scroll = (ScrollView) view.findViewById(R.id.scoreScrollView);
+        //scroll.fullScroll(ScrollView.FOCUS_DOWN);
     }
 
     /** reverts the last move */

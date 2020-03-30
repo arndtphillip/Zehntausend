@@ -20,8 +20,10 @@ public class GameState {
     }
 
     public void undo() {
-        // find last turn
-        int player = --playerTurns % scores.size();
-        scores.get(player).undo();
+        if (playerTurns > 0) {
+            // find last turn
+            int player = --playerTurns % scores.size();
+            scores.get(player).undo();
+        }
     }
 }
