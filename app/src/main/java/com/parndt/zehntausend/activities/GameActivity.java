@@ -11,7 +11,6 @@ import android.widget.EditText;
 
 import com.parndt.zehntausend.R;
 import com.parndt.zehntausend.adapters.PlayerScoreAdapter;
-import com.parndt.zehntausend.adapters.PlayerScoreFooterAdapter;
 import com.parndt.zehntausend.model.GameState;
 import com.parndt.zehntausend.model.Player;
 import com.parndt.zehntausend.model.PlayerScore;
@@ -23,14 +22,12 @@ public class GameActivity extends AppCompatActivity {
 
     private GameState state;
     private RecyclerView.Adapter scoreAdapter;
-    private RecyclerView.Adapter footerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
         RecyclerView scoreRecyclerView = (RecyclerView) findViewById(R.id.tableScores);
-        RecyclerView footerRecyclerView = (RecyclerView) findViewById(R.id.scoreFooter);
 
         Bundle extras = getIntent().getExtras();
         ArrayList<Parcelable> parcelables = extras.getParcelableArrayList(NewGameActivity.EXTRA_PLAYERS);
@@ -47,13 +44,9 @@ public class GameActivity extends AppCompatActivity {
         state = new GameState(players);
 
         scoreRecyclerView.setLayoutManager(new GridLayoutManager(this, players.size()));
-        footerRecyclerView.setLayoutManager(new GridLayoutManager(this, players.size()));
 
         scoreAdapter = new PlayerScoreAdapter(players);
         scoreRecyclerView.setAdapter(scoreAdapter);
-
-        footerAdapter = new PlayerScoreFooterAdapter(players);
-        footerRecyclerView.setAdapter(footerAdapter);
     }
 
     /** adds new points to the player scores */
@@ -62,7 +55,6 @@ public class GameActivity extends AppCompatActivity {
         state.addScore(Integer.parseInt(pointsText.getText().toString()));
 
         scoreAdapter.notifyDataSetChanged();
-        footerAdapter.notifyDataSetChanged();
 
         pointsText.getText().clear();
     }
