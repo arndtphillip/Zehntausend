@@ -26,4 +26,9 @@ public class GameState {
             scores.get(player).undo();
         }
     }
+
+    public Player getCurrentPlayer() {
+        int player = playerTurns % scores.size();
+        return scores.get(player).getPlayer();
+    }
 }

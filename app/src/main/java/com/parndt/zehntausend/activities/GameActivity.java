@@ -49,25 +49,38 @@ public class GameActivity extends AppCompatActivity {
 
         scoreAdapter = new PlayerScoreAdapter(players);
         scoreRecyclerView.setAdapter(scoreAdapter);
+
+        setCurrentPlayerHint();
     }
 
     /** adds new points to the player scores */
     public void addScore(View view) {
         EditText pointsText = (EditText) findViewById(R.id.pointsText);
-        state.addScore(Integer.parseInt(pointsText.getText().toString()));
 
-        scoreAdapter.notifyDataSetChanged();
+        try {
+            state.addScore(Integer.parseInt(pointsText.getText().toString()));
 
-        pointsText.getText().clear();
+            scoreAdapter.notifyDataSetChanged();
+            setCurrentPlayerHint();
 
-        // scroll to bottom
-        ScrollView scroll = (ScrollView) view.findViewById(R.id.scoreScrollView);
-        //scroll.fullScroll(ScrollView.FOCUS_DOWN);
+            // scroll to bottom
+            ScrollView scroll = (ScrollView) view.findViewById(R.id.scoreScrollView);
+            //scroll.fullScroll(ScrollView.FOCUS_DOWN);
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
     }
 
     /** reverts the last move */
     public void undo(View view) {
         state.undo();
         scoreAdapter.notifyDataSetChanged();
+        setCurrentPlayerHint();
+    }
+
+    private void setCurrentPlayerHint() {
+        EditText pointsText = (EditText) findViewById(R.id.pointsText);
+        pointsText.getText().clear();
+        pointsText.setHint(state.getCurrentPlayer().getName());
     }
 }
