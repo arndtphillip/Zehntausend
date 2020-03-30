@@ -1,5 +1,6 @@
 package com.parndt.zehntausend.adapters;
 
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,15 +33,24 @@ public class PlayerScoreAdapter extends RecyclerView.Adapter<PlayerScoreAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull PlayerScoreViewHolder holder, int position) {
-        PlayerScore player = players.get(position % players.size());
-        int points = player.getPoints().get((int)Math.floor(position / (double)players.size()));
+        if (position < players.size()) {
+            String name = players.get(position).getPlayer().getName();
 
-        holder.scoreText.setText(String.format("%d", points));
+            holder.scoreText.setText(name);
+            holder.scoreText.setTypeface(null, Typeface.BOLD);
+        } else {
+            position -= players.size();
+
+            PlayerScore player = players.get(position % players.size());
+            int points = player.getPoints().get((int) Math.floor(position / (double) players.size()));
+
+            holder.scoreText.setText(String.format("%d", points));
+        }
     }
 
     @Override
     public int getItemCount() {
-        int count = 0;
+        int count = players.size();
         for (PlayerScore player : players) {
             count += player.getPoints().size();
         }

@@ -12,7 +12,6 @@ import android.widget.EditText;
 import com.parndt.zehntausend.R;
 import com.parndt.zehntausend.adapters.PlayerScoreAdapter;
 import com.parndt.zehntausend.adapters.PlayerScoreFooterAdapter;
-import com.parndt.zehntausend.adapters.PlayerScoreHeaderAdapter;
 import com.parndt.zehntausend.model.GameState;
 import com.parndt.zehntausend.model.Player;
 import com.parndt.zehntausend.model.PlayerScore;
@@ -30,7 +29,6 @@ public class GameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-        RecyclerView headerRecyclerView = (RecyclerView) findViewById(R.id.scoreHeader);
         RecyclerView scoreRecyclerView = (RecyclerView) findViewById(R.id.tableScores);
         RecyclerView footerRecyclerView = (RecyclerView) findViewById(R.id.scoreFooter);
 
@@ -48,12 +46,8 @@ public class GameActivity extends AppCompatActivity {
 
         state = new GameState(players);
 
-        headerRecyclerView.setLayoutManager(new GridLayoutManager(this, players.size()));
         scoreRecyclerView.setLayoutManager(new GridLayoutManager(this, players.size()));
         footerRecyclerView.setLayoutManager(new GridLayoutManager(this, players.size()));
-
-        PlayerScoreHeaderAdapter headerAdapter = new PlayerScoreHeaderAdapter(players);
-        headerRecyclerView.setAdapter(headerAdapter);
 
         scoreAdapter = new PlayerScoreAdapter(players);
         scoreRecyclerView.setAdapter(scoreAdapter);

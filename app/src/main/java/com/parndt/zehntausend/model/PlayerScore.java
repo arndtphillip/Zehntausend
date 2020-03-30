@@ -33,7 +33,7 @@ public class PlayerScore {
     public void addPoints(int points) {
         int rounds = this.points.size();
 
-        if (rounds >= 2 && this.points.get(rounds - 1) == 0 && this.points.get(rounds - 2) == 0) {
+        if (points == 0 && rounds >= 2 && this.points.get(rounds - 1) == 0 && this.points.get(rounds - 2) == 0) {
             this.points.add(-500);
         } else {
             this.points.add(points);
