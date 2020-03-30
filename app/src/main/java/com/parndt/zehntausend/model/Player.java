@@ -3,7 +3,9 @@ package com.parndt.zehntausend.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Player implements Parcelable {
+import java.io.Serializable;
+
+public class Player implements Parcelable, Serializable {
 
     private static int idGenerator = 1;
 

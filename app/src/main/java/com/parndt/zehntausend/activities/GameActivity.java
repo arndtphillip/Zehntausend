@@ -12,6 +12,7 @@ import android.widget.ScrollView;
 
 import com.parndt.zehntausend.R;
 import com.parndt.zehntausend.adapters.PlayerScoreAdapter;
+import com.parndt.zehntausend.model.Constants;
 import com.parndt.zehntausend.model.GameState;
 import com.parndt.zehntausend.model.Player;
 import com.parndt.zehntausend.model.PlayerScore;
@@ -29,26 +30,19 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-        RecyclerView scoreRecyclerView = (RecyclerView) findViewById(R.id.tableScores);
-
         Bundle extras = getIntent().getExtras();
-        ArrayList<Parcelable> parcelables = extras.getParcelableArrayList(NewGameActivity.EXTRA_PLAYERS);
+        ArrayList<Parcelable> parcelables = extras.getParcelableArrayList(Constants.PLAYERS);
 
-        List<PlayerScore> players = new ArrayList<>();
         if (parcelables != null) {
-            for (Parcelable p : parcelables) {
-                if (p instanceof Player) {
-                    players.add(new PlayerScore((Player) p));
-                }
-            }
+            newGame(parcelables);
+        } else {
+            state = (GameState) getIntent().getSerializableExtra(Constants.GAME_STATE);
         }
 
-        state = new GameState(players);
-
-        scoreRecyclerView.setLayoutManager(new GridLayoutManager(this, players.size()));
-
-        scoreAdapter = new PlayerScoreAdapter(players);
-        scoreRecyclerView.setAdapter(scoreAdapter);
+        RecyclerView scoreView = (RecyclerView) findViewById(R.id.tableScores);
+        scoreView.setLayoutManager(new GridLayoutManager(this, state.getPlayers().size()));
+        scoreAdapter = new PlayerScoreAdapter(state.getPlayers());
+        scoreView.setAdapter(scoreAdapter);
 
         dataChanged();
     }
@@ -74,6 +68,19 @@ public class GameActivity extends AppCompatActivity {
     public void undo(View view) {
         state.undo();
         dataChanged();
+    }
+
+    private void newGame(List<Parcelable> parcelables) {
+        List<PlayerScore> players = new ArrayList<>();
+        if (parcelables != null) {
+            for (Parcelable p : parcelables) {
+                if (p instanceof Player) {
+                    players.add(new PlayerScore((Player) p));
+                }
+            }
+        }
+
+        state = new GameState(players);
     }
 
     private void dataChanged() {

@@ -4,21 +4,26 @@ import android.content.Context;
 
 import com.parndt.zehntausend.data.ScoreSaver;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class GameState {
+public class GameState implements Serializable {
 
-    private List<PlayerScore> scores;
+    private List<PlayerScore> players;
     private int playerTurns = 0;
 
-    public GameState(List<PlayerScore> scores) {
-        this.scores = scores;
+    public List<PlayerScore> getPlayers() {
+        return players;
+    }
+
+    public GameState(List<PlayerScore> players) {
+        this.players = players;
     }
 
     public void addScore(int points) {
-        int player = playerTurns % scores.size();
+        int player = playerTurns % players.size();
 
-        scores.get(player).addPoints(points);
+        players.get(player).addPoints(points);
 
         playerTurns++;
     }
@@ -26,17 +31,17 @@ public class GameState {
     public void undo() {
         if (playerTurns > 0) {
             // find last turn
-            int player = --playerTurns % scores.size();
-            scores.get(player).undo();
+            int player = --playerTurns % players.size();
+            players.get(player).undo();
         }
     }
 
     public Player getCurrentPlayer() {
-        int player = playerTurns % scores.size();
-        return scores.get(player).getPlayer();
+        int player = playerTurns % players.size();
+        return players.get(player).getPlayer();
     }
 
     public void save(Context context) {
-        new ScoreSaver(scores).save(context);
+        new ScoreSaver(this).save(context);
     }
 }

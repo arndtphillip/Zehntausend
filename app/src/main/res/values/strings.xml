@@ -6,4 +6,5 @@
     <string name="start_game">Start game</string>
     <string name="delete">Delete</string>
     <string name="undo">Undo</string>
+    <string name="resume">Resume</string>
 </resources>

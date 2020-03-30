@@ -12,13 +12,12 @@ import android.widget.EditText;
 
 import com.parndt.zehntausend.R;
 import com.parndt.zehntausend.adapters.PlayerNameAdapter;
+import com.parndt.zehntausend.model.Constants;
 import com.parndt.zehntausend.model.Player;
 
 import java.util.ArrayList;
 
 public class NewGameActivity extends AppCompatActivity {
-
-    public static final String EXTRA_PLAYERS = "com.parndt.zehntausend.PLAYERS";
 
     private RecyclerView.Adapter adapter;
 
@@ -53,7 +52,7 @@ public class NewGameActivity extends AppCompatActivity {
     public void startGame(View view) {
         Intent intent = new Intent(this, GameActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putParcelableArrayList(EXTRA_PLAYERS, players);
+        bundle.putParcelableArrayList(Constants.PLAYERS, players);
         intent.putExtras(bundle);
         startActivity(intent);
     }

@@ -1,9 +1,10 @@
 package com.parndt.zehntausend.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PlayerScore {
+public class PlayerScore implements Serializable {
 
     private Player player;
     private List<Integer> points = new ArrayList<>();
