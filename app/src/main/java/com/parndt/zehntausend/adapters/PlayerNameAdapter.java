@@ -38,7 +38,7 @@ public class PlayerNameAdapter extends RecyclerView.Adapter<PlayerNameAdapter.Pl
         // - replace the contents of the view with that element
         Player player = players.get(position);
 
-        holder.playerIdText.setText(String.format("%d", player.getId()));
+        holder.playerIdText.setText(String.format("%d", position + 1));
         holder.playerNameText.setText(player.getName());
 
         holder.deleteButton.setOnClickListener(new View.OnClickListener() {

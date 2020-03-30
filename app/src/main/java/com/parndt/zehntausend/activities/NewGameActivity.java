@@ -42,10 +42,12 @@ public class NewGameActivity extends AppCompatActivity {
         EditText playerText = (EditText) findViewById(R.id.playerName);
         String playerName = playerText.getText().toString();
 
-        players.add(new Player(playerName));
-        adapter.notifyDataSetChanged();
+        if (!playerName.equals("")) {
+            players.add(new Player(playerName));
+            adapter.notifyDataSetChanged();
 
-        playerText.getText().clear();
+            playerText.getText().clear();
+        }
     }
 
     /** starts the game with the entered players */

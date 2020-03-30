@@ -35,46 +35,52 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/scoreScrollView">
 
+        <ImageButton
+            android:id="@+id/undoButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:contentDescription="@string/undo"
+            android:onClick="undo"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/pointsText"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_undo_red_24dp" />
+
         <EditText
             android:id="@+id/pointsText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="96dp"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
             android:ems="10"
             android:inputType="number"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/buttonAddPoints"
+            app:layout_constraintEnd_toStartOf="@+id/addPointsButton"
             app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/undoButton"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.526" />
 
-        <Button
-            android:id="@+id/buttonAddPoints"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="addScore"
-            android:text="@string/add"
-            app:layout_constraintBaseline_toBaselineOf="@+id/pointsText"
-            app:layout_constraintEnd_toStartOf="@+id/buttonUndo"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/pointsText" />
-
-        <Button
-            android:id="@+id/buttonUndo"
+        <ImageButton
+            android:id="@+id/addPointsButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
-            android:onClick="undo"
-            android:text="@string/undo"
-            app:layout_constraintBaseline_toBaselineOf="@+id/pointsText"
+            android:contentDescription="@string/add"
+            android:onClick="addScore"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/buttonAddPoints" />
+            app:layout_constraintStart_toEndOf="@+id/pointsText"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_add_circle_green_24dp" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
