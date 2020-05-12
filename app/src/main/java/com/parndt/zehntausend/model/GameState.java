@@ -7,14 +7,19 @@ import com.parndt.zehntausend.data.HistoryWriter;
 import com.parndt.zehntausend.data.ScoreSaver;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 public class GameState implements Serializable {
 
-    private LocalDateTime dateTime;
     private List<PlayerScore> players;
     private int playerTurns = 0;
+
+    private Date dateStart;
+    private Date dateEnd;
 
     /** win conditions */
     private boolean tenThousandReached = false;
@@ -24,8 +29,38 @@ public class GameState implements Serializable {
         return players;
     }
 
+    public String getDate() {
+        SimpleDateFormat formatter = new SimpleDateFormat("kk:mm \nLLL d yyyy", Locale.UK);
+        String test = formatter.format(dateStart);
+
+        return test;
+    }
+
+    public String getDuration() {
+        long diffInMillies = dateEnd.getTime() - dateStart.getTime();
+        return TimeUnit.MINUTES.convert(diffInMillies, TimeUnit.MILLISECONDS) + " min";
+    }
+
+    public Player getWinner() {
+        Player winner = null;
+        int highscore = 10000;
+
+        if (gameOver()) {
+            for (PlayerScore player : players) {
+                if (player.getPointsSum() >= highscore) {
+                    winner = player.getPlayer();
+                    highscore = player.getPointsSum();
+                }
+            }
+        }
+
+        return winner;
+    }
+
     public GameState(List<PlayerScore> players) {
         this.players = players;
+
+        dateStart = new Date();
 
         turnsLeft = players.size();
     }
@@ -42,6 +77,10 @@ public class GameState implements Serializable {
             if (players.get(player).hasWon()) {
                 tenThousandReached = true;
                 turnsLeft--;
+            }
+
+            if (turnsLeft == 0) {
+                dateEnd = new Date();
             }
         }
     }

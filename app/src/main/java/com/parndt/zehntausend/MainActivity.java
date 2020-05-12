@@ -26,6 +26,10 @@ public class MainActivity extends AppCompatActivity {
 
         try {
             resumeState = new ScoreLoader().load(getApplicationContext());
+
+            if (resumeState.gameOver()) {
+                throw new NoDataException("Game already finished! ");
+            }
         } catch (NoDataException e) {
             Button resumeButton = (Button) findViewById(R.id.resumeGameButton);
             resumeButton.setVisibility(View.INVISIBLE);
