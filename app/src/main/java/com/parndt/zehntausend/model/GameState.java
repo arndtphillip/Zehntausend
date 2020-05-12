@@ -2,13 +2,17 @@ package com.parndt.zehntausend.model;
 
 import android.content.Context;
 
+import com.parndt.zehntausend.data.HistoryReader;
+import com.parndt.zehntausend.data.HistoryWriter;
 import com.parndt.zehntausend.data.ScoreSaver;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class GameState implements Serializable {
 
+    private LocalDateTime dateTime;
     private List<PlayerScore> players;
     private int playerTurns = 0;
 
@@ -61,6 +65,12 @@ public class GameState implements Serializable {
 
     public void save(Context context) {
         new ScoreSaver(this).save(context);
+
+        if (gameOver()) {
+            History history = new HistoryReader().read(context);
+            history.add(this);
+            new HistoryWriter(history).write(context);
+        }
     }
 
     public boolean gameOver() {

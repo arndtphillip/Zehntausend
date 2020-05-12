@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.parndt.zehntausend.activities.GameActivity;
+import com.parndt.zehntausend.activities.HistoryActivity;
 import com.parndt.zehntausend.activities.NewGameActivity;
 import com.parndt.zehntausend.data.NoDataException;
 import com.parndt.zehntausend.data.ScoreLoader;
@@ -26,21 +27,28 @@ public class MainActivity extends AppCompatActivity {
         try {
             resumeState = new ScoreLoader().load(getApplicationContext());
         } catch (NoDataException e) {
-            Button resumeButton = (Button) findViewById(R.id.resumeButton);
+            Button resumeButton = (Button) findViewById(R.id.resumeGameButton);
             resumeButton.setVisibility(View.INVISIBLE);
         }
 
     }
 
-    /** called when the user clicks start new game button */
+    /** called when the user clicks the new game button */
     public void startGame(View view) {
         Intent intent = new Intent(this, NewGameActivity.class);
         startActivity(intent);
     }
 
+    /** called when the user clicks the resume button */
     public void resumeGame(View view) {
         Intent intent = new Intent(this, GameActivity.class);
         intent.putExtra(Constants.GAME_STATE, resumeState);
+        startActivity(intent);
+    }
+
+    /** called when the user clicks the history button */
+    public void history(View view) {
+        Intent intent = new Intent(this, HistoryActivity.class);
         startActivity(intent);
     }
 }

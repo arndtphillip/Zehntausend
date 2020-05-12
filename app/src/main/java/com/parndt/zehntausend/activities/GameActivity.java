@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ScrollView;
 
+import com.parndt.zehntausend.MainActivity;
 import com.parndt.zehntausend.R;
 import com.parndt.zehntausend.adapters.PlayerHeaderAdapter;
 import com.parndt.zehntausend.adapters.PlayerScoreAdapter;
@@ -25,7 +26,6 @@ import java.util.List;
 public class GameActivity extends AppCompatActivity {
 
     private GameState state;
-    private RecyclerView.Adapter headerAdapter;
     private RecyclerView.Adapter scoreAdapter;
 
     @Override
@@ -51,7 +51,7 @@ public class GameActivity extends AppCompatActivity {
     private void setHeaderAdapter() {
         RecyclerView headerView = (RecyclerView) findViewById(R.id.scoreHeader);
         headerView.setLayoutManager(new GridLayoutManager(this, state.getPlayers().size()));
-        headerAdapter = new PlayerHeaderAdapter(state.getPlayers());
+        RecyclerView.Adapter headerAdapter = new PlayerHeaderAdapter(state.getPlayers());
         headerView.setAdapter(headerAdapter);
     }
 
@@ -113,5 +113,12 @@ public class GameActivity extends AppCompatActivity {
         pointsText.setHint(state.getCurrentPlayer().getName());
 
         state.save(getApplicationContext());
+    }
+
+    // go back to main activity when the back button is pressed
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 }
