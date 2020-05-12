@@ -48,10 +48,6 @@ public class PlayerScore implements Serializable {
     }
 
     public boolean hasWon() {
-        if (points.size() > 0) {
-            return points.get(points.size() - 1) >= 10000;
-        }
-
-        return false;
+        return getPointsSum() >= 10000;
     }
 }

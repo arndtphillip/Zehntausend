@@ -35,7 +35,7 @@ public class GameState implements Serializable {
             playerTurns++;
             if (tenThousandReached) turnsLeft--;
 
-            if (players.get(player).getPointsSum() >= 10000) {
+            if (players.get(player).hasWon()) {
                 tenThousandReached = true;
                 turnsLeft--;
             }
@@ -47,6 +47,10 @@ public class GameState implements Serializable {
             // find last turn
             int player = --playerTurns % players.size();
             players.get(player).undo();
+
+            if (tenThousandReached && turnsLeft < players.size()) {
+                turnsLeft++;
+            }
         }
     }
 
