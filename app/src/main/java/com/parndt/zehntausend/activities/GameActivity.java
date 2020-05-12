@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.ScrollView;
 
 import com.parndt.zehntausend.R;
+import com.parndt.zehntausend.adapters.PlayerHeaderAdapter;
 import com.parndt.zehntausend.adapters.PlayerScoreAdapter;
 import com.parndt.zehntausend.model.Constants;
 import com.parndt.zehntausend.model.GameState;
@@ -24,6 +25,7 @@ import java.util.List;
 public class GameActivity extends AppCompatActivity {
 
     private GameState state;
+    private RecyclerView.Adapter headerAdapter;
     private RecyclerView.Adapter scoreAdapter;
 
     @Override
@@ -40,12 +42,24 @@ public class GameActivity extends AppCompatActivity {
             state = (GameState) getIntent().getSerializableExtra(Constants.GAME_STATE);
         }
 
+        setHeaderAdapter();
+        setScoreAdapter();
+
+        dataChanged();
+    }
+
+    private void setHeaderAdapter() {
+        RecyclerView headerView = (RecyclerView) findViewById(R.id.scoreHeader);
+        headerView.setLayoutManager(new GridLayoutManager(this, state.getPlayers().size()));
+        headerAdapter = new PlayerHeaderAdapter(state.getPlayers());
+        headerView.setAdapter(headerAdapter);
+    }
+
+    private void setScoreAdapter() {
         RecyclerView scoreView = (RecyclerView) findViewById(R.id.tableScores);
         scoreView.setLayoutManager(new GridLayoutManager(this, state.getPlayers().size()));
         scoreAdapter = new PlayerScoreAdapter(state.getPlayers());
         scoreView.setAdapter(scoreAdapter);
-
-        dataChanged();
     }
 
     /** adds new points to the player scores */
@@ -58,7 +72,7 @@ public class GameActivity extends AppCompatActivity {
             dataChanged();
 
             // scroll to bottom
-            ScrollView scroll = (ScrollView) view.findViewById(R.id.scoreScrollView);
+            //ScrollView scroll = (ScrollView) view.findViewById(R.id.scoreScrollView);
             //scroll.fullScroll(ScrollView.FOCUS_DOWN);
         } catch (NumberFormatException e) {
             e.printStackTrace();
@@ -91,6 +105,7 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void dataChanged() {
+        // only score adapter needs to update
         scoreAdapter.notifyDataSetChanged();
 
         EditText pointsText = (EditText) findViewById(R.id.pointsText);

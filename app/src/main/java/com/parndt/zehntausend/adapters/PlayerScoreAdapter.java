@@ -33,26 +33,14 @@ public class PlayerScoreAdapter extends RecyclerView.Adapter<PlayerScoreAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull PlayerScoreViewHolder holder, int position) {
-        if (position < players.size()) {
-            renderHeader(holder, position);
+        int turnCount = players.get(0).getPoints().size() * players.size();
+
+        if (position < turnCount) {
+            renderScore(holder, position);
         } else {
-            position -= players.size();
-            int turnCount = players.get(0).getPoints().size() * players.size();
-
-            if (position < turnCount) {
-                renderScore(holder, position);
-            } else {
-                position -= turnCount;
-                renderScoreSum(holder, position);
-            }
+            position -= turnCount;
+            renderScoreSum(holder, position);
         }
-    }
-
-    private void renderHeader(@NonNull PlayerScoreViewHolder holder, int position) {
-        String name = players.get(position).getPlayer().getName();
-
-        holder.scoreText.setText(name);
-        holder.scoreText.setTypeface(null, Typeface.BOLD);
     }
 
     private void renderScore(@NonNull PlayerScoreViewHolder holder, int position) {
@@ -85,11 +73,10 @@ public class PlayerScoreAdapter extends RecyclerView.Adapter<PlayerScoreAdapter.
 
     @Override
     public int getItemCount() {
-        int playerCount = players.size();
         int playerTurnCount = players.get(0).getPoints().size();
         int playerSumCount = players.size();
 
-        return playerCount + playerTurnCount * players.size() + playerSumCount;
+        return playerTurnCount * players.size() + playerSumCount;
     }
 
     // Provide a reference to the views for each data item
