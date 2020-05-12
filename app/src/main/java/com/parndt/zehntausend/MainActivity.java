@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
             }
         } catch (NoDataException e) {
             Button resumeButton = (Button) findViewById(R.id.resumeGameButton);
-            resumeButton.setVisibility(View.INVISIBLE);
+            resumeButton.setVisibility(View.GONE);
         }
 
     }
