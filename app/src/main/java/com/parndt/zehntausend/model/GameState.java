@@ -74,7 +74,7 @@ public class GameState implements Serializable {
             playerTurns++;
             if (tenThousandReached) turnsLeft--;
 
-            if (players.get(player).hasWon()) {
+            if (players.get(player).hasWon() && !tenThousandReached) {
                 tenThousandReached = true;
                 turnsLeft--;
             }

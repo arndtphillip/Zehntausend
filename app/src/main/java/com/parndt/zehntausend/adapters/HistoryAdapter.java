@@ -33,14 +33,13 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryV
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.history_list, parent, false);
 
-
-
         return new HistoryViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull HistoryViewHolder holder, int position) {
-        final GameState game = history.getGames().get(position);
+        int currentGame = history.getGames().size() - 1 - position;
+        final GameState game = history.getGames().get(currentGame);
 
         holder.dateText.setText(game.getDate());
         holder.winnerText.setText(game.getWinner().getName());
