@@ -1,5 +1,6 @@
 package com.parndt.zehntausend.adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -8,17 +9,14 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityOptionsCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.parndt.zehntausend.R;
-import com.parndt.zehntausend.activities.ChartActivity;
 import com.parndt.zehntausend.activities.HistoryDetailActivity;
 import com.parndt.zehntausend.model.Constants;
 import com.parndt.zehntausend.model.GameState;
 import com.parndt.zehntausend.model.History;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 
 public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryViewHolder> {
 

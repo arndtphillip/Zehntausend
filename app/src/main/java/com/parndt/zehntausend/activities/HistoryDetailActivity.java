@@ -3,6 +3,7 @@ package com.parndt.zehntausend.activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.parndt.zehntausend.ChartAdapter;
@@ -23,5 +24,7 @@ public class HistoryDetailActivity extends AppCompatActivity {
         LineChart chart = findViewById(R.id.pointsChart);
 
         new ChartAdapter(state, chart, getApplicationContext()).adapt();
+
+        ((TextView) findViewById(R.id.winnerText)).setText("Winner: " + state.getWinner().getName());
     }
 }
