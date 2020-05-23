@@ -41,8 +41,8 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryV
         int currentGame = history.getGames().size() - 1 - position;
         final GameState game = history.getGames().get(currentGame);
 
+        holder.winnerText.setText(String.format("Winner: %s", game.getWinner().getName()));
         holder.dateText.setText(game.getDate());
-        holder.winnerText.setText(game.getWinner().getName());
         holder.durationText.setText(game.getDuration());
 
         // launch chart activity onclick
