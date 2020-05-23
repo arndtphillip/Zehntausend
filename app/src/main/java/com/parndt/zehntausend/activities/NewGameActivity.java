@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 
 import com.parndt.zehntausend.R;
@@ -27,7 +26,7 @@ public class NewGameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_game);
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.playerListView);
+        RecyclerView recyclerView = findViewById(R.id.playerListView);
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
@@ -39,12 +38,17 @@ public class NewGameActivity extends AppCompatActivity {
 
     /** adds a new player */
     public void addPlayer(View view) {
-        EditText playerText = (EditText) findViewById(R.id.playerName);
+        EditText playerText = findViewById(R.id.playerName);
         String playerName = playerText.getText().toString();
 
         if (!playerName.equals("")) {
             players.add(new Player(playerName));
             adapter.notifyDataSetChanged();
+            if (players.size() > 1) {
+                findViewById(R.id.startGameButton).setVisibility(View.VISIBLE);
+            } else {
+                findViewById(R.id.startGameButton).setVisibility(View.GONE);
+            }
 
             playerText.getText().clear();
         }
