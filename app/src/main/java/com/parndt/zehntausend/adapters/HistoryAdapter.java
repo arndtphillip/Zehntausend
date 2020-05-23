@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.parndt.zehntausend.R;
 import com.parndt.zehntausend.activities.ChartActivity;
+import com.parndt.zehntausend.activities.HistoryDetailActivity;
 import com.parndt.zehntausend.model.Constants;
 import com.parndt.zehntausend.model.GameState;
 import com.parndt.zehntausend.model.History;
@@ -50,7 +51,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryV
             @Override
             public void onClick(View v) {
                 Context context = v.getContext();
-                Intent intent = new Intent(context, ChartActivity.class);
+                Intent intent = new Intent(context, HistoryDetailActivity.class);
                 intent.putExtra(Constants.GAME_STATE, game);
                 context.startActivity(intent);
             }
