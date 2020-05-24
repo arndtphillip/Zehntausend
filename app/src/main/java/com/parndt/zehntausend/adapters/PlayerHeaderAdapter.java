@@ -1,28 +1,37 @@
 package com.parndt.zehntausend.adapters;
 
+import android.content.Context;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.parndt.zehntausend.R;
+import com.parndt.zehntausend.model.Player;
 import com.parndt.zehntausend.model.PlayerScore;
 
 import java.util.List;
 
+import static androidx.core.content.ContextCompat.getDrawable;
+
 public class PlayerHeaderAdapter extends RecyclerView.Adapter<PlayerHeaderAdapter.PlayerHeaderViewHolder> {
 
     private List<PlayerScore> players;
+    private Context context;
 
     public PlayerHeaderAdapter(List<PlayerScore> players) { this.players = players; }
 
     @NonNull
     @Override
     public PlayerHeaderViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        context = parent.getContext();
+
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.player_score_header, parent, false);
 
@@ -35,6 +44,21 @@ public class PlayerHeaderAdapter extends RecyclerView.Adapter<PlayerHeaderAdapte
 
         holder.nameText.setTypeface(null, Typeface.BOLD);
         holder.nameText.setText(name);
+
+
+        // get current player
+        int playerTurns = 0;
+        for (PlayerScore player : players) {
+            playerTurns += player.getPoints().size();
+        }
+
+        int currentPlayer = playerTurns % players.size();
+        if (position == currentPlayer) {
+            Drawable borderBottom = AppCompatResources.getDrawable(context, R.drawable.border_bottom);
+            holder.nameText.setBackground(borderBottom);
+        } else {
+            holder.nameText.setBackground(null);
+        }
     }
 
     @Override

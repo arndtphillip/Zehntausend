@@ -25,6 +25,7 @@ import java.util.List;
 public class GameActivity extends AppCompatActivity {
 
     private GameState state;
+    private RecyclerView.Adapter headerAdapter;
     private RecyclerView.Adapter scoreAdapter;
 
     @Override
@@ -50,7 +51,7 @@ public class GameActivity extends AppCompatActivity {
     private void setHeaderAdapter() {
         RecyclerView headerView = (RecyclerView) findViewById(R.id.scoreHeader);
         headerView.setLayoutManager(new GridLayoutManager(this, state.getPlayers().size()));
-        RecyclerView.Adapter headerAdapter = new PlayerHeaderAdapter(state.getPlayers());
+        headerAdapter = new PlayerHeaderAdapter(state.getPlayers());
         headerView.setAdapter(headerAdapter);
     }
 
@@ -71,8 +72,13 @@ public class GameActivity extends AppCompatActivity {
             dataChanged();
 
             // scroll to bottom
-            //ScrollView scroll = (ScrollView) view.findViewById(R.id.scoreScrollView);
-            //scroll.fullScroll(ScrollView.FOCUS_DOWN);
+            /*final ScrollView scroll = findViewById(R.id.scoreScrollView);
+            scroll.post(new Runnable() {
+                @Override
+                public void run() {
+                    scroll.fullScroll(View.FOCUS_DOWN);
+                }
+            });*/
         } catch (NumberFormatException e) {
             e.printStackTrace();
         }
@@ -105,7 +111,7 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void dataChanged() {
-        // only score adapter needs to update
+        headerAdapter.notifyDataSetChanged();
         scoreAdapter.notifyDataSetChanged();
 
         EditText pointsText = (EditText) findViewById(R.id.pointsText);
