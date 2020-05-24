@@ -29,9 +29,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
+        // we need to reload the data every time the user comes back to the main activity
         loadData();
     }
 
+    /**
+     * loads the data of the most recent unfinished game into memory
+     * hides the resume button if there is no unfinished game
+     * see {@link ScoreLoader} for more information on loading the data
+     */
     private void loadData() {
         try {
             resumeState = new ScoreLoader().load(getApplicationContext());

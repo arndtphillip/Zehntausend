@@ -37,6 +37,10 @@ public class Player implements Parcelable, Serializable {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public Player(String name) {
         this.id = idGenerator;
         idGenerator++;

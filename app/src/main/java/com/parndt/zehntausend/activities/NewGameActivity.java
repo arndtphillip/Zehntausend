@@ -20,7 +20,10 @@ public class NewGameActivity extends AppCompatActivity {
 
     private RecyclerView.Adapter adapter;
 
-    private ArrayList<Player> players = new ArrayList<>();
+    private ArrayList<Player> players = new ArrayList<Player>() {{
+        add(new Player(""));
+        add(new Player(""));
+    }};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,24 +41,14 @@ public class NewGameActivity extends AppCompatActivity {
 
     /** adds a new player */
     public void addPlayer(View view) {
-        EditText playerText = findViewById(R.id.playerName);
-        String playerName = playerText.getText().toString();
-
-        if (!playerName.equals("")) {
-            players.add(new Player(playerName));
-            adapter.notifyDataSetChanged();
-            if (players.size() > 1) {
-                findViewById(R.id.startGameButton).setVisibility(View.VISIBLE);
-            } else {
-                findViewById(R.id.startGameButton).setVisibility(View.GONE);
-            }
-
-            playerText.getText().clear();
-        }
+        players.add(new Player(""));
+        adapter.notifyDataSetChanged();
     }
 
     /** starts the game with the entered players */
     public void startGame(View view) {
+        replaceEmptyPlayers();
+
         Intent intent = new Intent(this, GameActivity.class);
         Bundle bundle = new Bundle();
         bundle.putParcelableArrayList(Constants.PLAYERS, players);
@@ -63,5 +56,14 @@ public class NewGameActivity extends AppCompatActivity {
         startActivity(intent);
 
         finish();
+    }
+
+    private void replaceEmptyPlayers() {
+        for (int i = 0; i < players.size(); i++) {
+            if (players.get(i).getName().isEmpty()) {
+                String name = getString(R.string.player) + " " + (i+1);
+                players.get(i).setName(name);
+            }
+        }
     }
 }
