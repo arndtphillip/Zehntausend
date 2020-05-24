@@ -61,5 +61,7 @@ public class NewGameActivity extends AppCompatActivity {
         bundle.putParcelableArrayList(Constants.PLAYERS, players);
         intent.putExtras(bundle);
         startActivity(intent);
+
+        finish();
     }
 }

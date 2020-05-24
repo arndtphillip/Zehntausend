@@ -11,7 +11,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ScrollView;
 
-import com.parndt.zehntausend.MainActivity;
 import com.parndt.zehntausend.R;
 import com.parndt.zehntausend.adapters.PlayerHeaderAdapter;
 import com.parndt.zehntausend.adapters.PlayerScoreAdapter;
@@ -82,6 +81,7 @@ public class GameActivity extends AppCompatActivity {
             Intent intent = new Intent(this, ChartActivity.class);
             intent.putExtra(Constants.GAME_STATE, state);
             startActivity(intent);
+            finish();
         }
     }
 
@@ -113,12 +113,5 @@ public class GameActivity extends AppCompatActivity {
         pointsText.setHint(state.getCurrentPlayer().getName());
 
         state.save(getApplicationContext());
-    }
-
-    // go back to main activity when the back button is pressed
-    @Override
-    public void onBackPressed() {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
     }
 }

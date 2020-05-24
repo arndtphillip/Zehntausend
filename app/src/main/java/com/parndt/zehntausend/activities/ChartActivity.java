@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import android.os.Bundle;
+import android.view.View;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Description;
@@ -32,5 +33,9 @@ public class ChartActivity extends AppCompatActivity {
         LineChart chart = findViewById(R.id.pointsChart);
 
         new ChartAdapter(state, chart, getApplicationContext()).adapt();
+    }
+
+    public void finish(View view) {
+        finish();
     }
 }

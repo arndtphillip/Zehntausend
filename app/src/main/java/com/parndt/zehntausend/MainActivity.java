@@ -23,7 +23,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        loadData();
+    }
+
+    private void loadData() {
         try {
             resumeState = new ScoreLoader().load(getApplicationContext());
 
@@ -34,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
             Button resumeButton = (Button) findViewById(R.id.resumeGameButton);
             resumeButton.setVisibility(View.GONE);
         }
-
     }
 
     /** called when the user clicks the new game button */
