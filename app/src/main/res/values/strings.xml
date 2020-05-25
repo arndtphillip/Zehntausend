@@ -14,5 +14,5 @@
     <string name="player">Player</string>
     <string name="add_player">Add player</string>
     <string name="show_graph">Show graph</string>
-    <string name="winner">Winner</string>
+    <string name="winner">Player won!</string>
 </resources>
