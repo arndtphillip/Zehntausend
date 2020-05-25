@@ -30,9 +30,14 @@ public class GameEndActivity extends AppCompatActivity {
 
         winnerText.setText(game.getWinner().getName() + " won!");
 
-        LinearLayout rotatingIcon = findViewById(R.id.rotator);
+        Animation translate = AnimationUtils.loadAnimation(this, R.anim.translate_top_to_bottom);
+        findViewById(R.id.winnerCard).startAnimation(translate);
+
         Animation rotate = AnimationUtils.loadAnimation(this, R.anim.rotate);
-        rotatingIcon.startAnimation(rotate);
+        // findViewById(R.id.rotator).startAnimation(rotate);
+        findViewById(R.id.rotating_icon1).startAnimation(rotate);
+        findViewById(R.id.rotating_icon2).startAnimation(rotate);
+        findViewById(R.id.rotating_icon3).startAnimation(rotate);
     }
 
     public void graph(View view) {

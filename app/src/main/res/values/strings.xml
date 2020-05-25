@@ -15,4 +15,6 @@
     <string name="add_player">Add player</string>
     <string name="show_graph">Show graph</string>
     <string name="winner">Player won!</string>
+    <string name="back">Back</string>
+    <string name="dice">Dice</string>
 </resources>

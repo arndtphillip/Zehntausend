@@ -20,7 +20,7 @@
         android:layout_alignParentBottom="true"
         android:layout_margin="16dp"
         android:layout_centerHorizontal="true"
-        android:text="@string/finish"
+        android:text="@string/back"
         android:onClick="finish"/>
 
 </RelativeLayout>
