@@ -73,18 +73,22 @@ public class GameActivity extends AppCompatActivity {
 
             // scroll to bottom
             /*final ScrollView scroll = findViewById(R.id.scoreScrollView);
-            scroll.post(new Runnable() {
+            scroll.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    scroll.fullScroll(View.FOCUS_DOWN);
+                    int height = 0;
+                    for (int i = 0; i < scroll.getChildCount(); i++) {
+                        height += scroll.getChildAt(i).getHeight();
+                    }
+                    scroll.scrollTo(0, height);
                 }
-            });*/
+            }, 100);*/
         } catch (NumberFormatException e) {
             e.printStackTrace();
         }
 
         if (state.gameOver()) {
-            Intent intent = new Intent(this, ChartActivity.class);
+            Intent intent = new Intent(this, GameEndActivity.class);
             intent.putExtra(Constants.GAME_STATE, state);
             startActivity(intent);
             finish();
