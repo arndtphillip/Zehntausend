@@ -8,6 +8,7 @@ import com.parndt.zehntausend.data.ScoreSaver;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -15,9 +16,10 @@ import java.util.concurrent.TimeUnit;
 
 public class GameState implements Serializable {
 
-    private List<PlayerScore> players;
+    private List<PlayerScore> players = new ArrayList<>();
     private int playerTurns = 0;
 
+    private boolean isStarted = false;
     private Date dateStart;
     private Date dateEnd;
 
@@ -41,6 +43,10 @@ public class GameState implements Serializable {
         return TimeUnit.MINUTES.convert(diffInMillies, TimeUnit.MILLISECONDS) + " min";
     }
 
+    public boolean isStarted() {
+        return isStarted;
+    }
+
     public Player getWinner() {
         Player winner = null;
         int highscore = 10000;
@@ -57,12 +63,20 @@ public class GameState implements Serializable {
         return winner;
     }
 
-    public GameState(List<PlayerScore> players) {
-        this.players = players;
+    public GameState() {
+
+    }
+
+    public void start(List<Player> players) {
+        for (Player player : players) {
+            this.players.add(new PlayerScore(player));
+        }
 
         dateStart = new Date();
 
         turnsLeft = players.size();
+
+        isStarted = true;
     }
 
     public void addScore(int points) {

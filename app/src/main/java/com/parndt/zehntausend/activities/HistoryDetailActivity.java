@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.LineChart;
-import com.parndt.zehntausend.ChartAdapter;
+import com.parndt.zehntausend.adapters.ChartAdapter;
 import com.parndt.zehntausend.R;
 import com.parndt.zehntausend.model.Constants;
 import com.parndt.zehntausend.model.GameState;

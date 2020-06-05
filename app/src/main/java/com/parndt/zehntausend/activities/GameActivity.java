@@ -6,21 +6,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ScrollView;
 
 import com.parndt.zehntausend.R;
+import com.parndt.zehntausend.Zehntausend;
 import com.parndt.zehntausend.adapters.PlayerHeaderAdapter;
 import com.parndt.zehntausend.adapters.PlayerScoreAdapter;
-import com.parndt.zehntausend.model.Constants;
 import com.parndt.zehntausend.model.GameState;
-import com.parndt.zehntausend.model.Player;
-import com.parndt.zehntausend.model.PlayerScore;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class GameActivity extends AppCompatActivity {
 
@@ -33,14 +26,7 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-        Bundle extras = getIntent().getExtras();
-        ArrayList<Parcelable> parcelables = extras.getParcelableArrayList(Constants.PLAYERS);
-
-        if (parcelables != null) {
-            newGame(parcelables);
-        } else {
-            state = (GameState) getIntent().getSerializableExtra(Constants.GAME_STATE);
-        }
+        state = Zehntausend.gameState;
 
         setHeaderAdapter();
         setScoreAdapter();
@@ -49,14 +35,14 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void setHeaderAdapter() {
-        RecyclerView headerView = (RecyclerView) findViewById(R.id.scoreHeader);
+        RecyclerView headerView = findViewById(R.id.scoreHeader);
         headerView.setLayoutManager(new GridLayoutManager(this, state.getPlayers().size()));
         headerAdapter = new PlayerHeaderAdapter(state.getPlayers());
         headerView.setAdapter(headerAdapter);
     }
 
     private void setScoreAdapter() {
-        RecyclerView scoreView = (RecyclerView) findViewById(R.id.tableScores);
+        RecyclerView scoreView = findViewById(R.id.tableScores);
         scoreView.setLayoutManager(new GridLayoutManager(this, state.getPlayers().size()));
         scoreAdapter = new PlayerScoreAdapter(state.getPlayers());
         scoreView.setAdapter(scoreAdapter);
@@ -64,7 +50,7 @@ public class GameActivity extends AppCompatActivity {
 
     /** adds new points to the player scores */
     public void addScore(View view) {
-        EditText pointsText = (EditText) findViewById(R.id.pointsText);
+        EditText pointsText = findViewById(R.id.pointsText);
 
         try {
             state.addScore(Integer.parseInt(pointsText.getText().toString()));
@@ -89,7 +75,6 @@ public class GameActivity extends AppCompatActivity {
 
         if (state.gameOver()) {
             Intent intent = new Intent(this, GameEndActivity.class);
-            intent.putExtra(Constants.GAME_STATE, state);
             startActivity(intent);
             finish();
         }
@@ -101,24 +86,11 @@ public class GameActivity extends AppCompatActivity {
         dataChanged();
     }
 
-    private void newGame(List<Parcelable> parcelables) {
-        List<PlayerScore> players = new ArrayList<>();
-        if (parcelables != null) {
-            for (Parcelable p : parcelables) {
-                if (p instanceof Player) {
-                    players.add(new PlayerScore((Player) p));
-                }
-            }
-        }
-
-        state = new GameState(players);
-    }
-
     private void dataChanged() {
         headerAdapter.notifyDataSetChanged();
         scoreAdapter.notifyDataSetChanged();
 
-        EditText pointsText = (EditText) findViewById(R.id.pointsText);
+        EditText pointsText = findViewById(R.id.pointsText);
         pointsText.getText().clear();
         pointsText.setHint(state.getCurrentPlayer().getName());
 

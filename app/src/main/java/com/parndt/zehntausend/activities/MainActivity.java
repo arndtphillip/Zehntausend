@@ -1,18 +1,15 @@
-package com.parndt.zehntausend;
-
-import androidx.appcompat.app.AppCompatActivity;
+package com.parndt.zehntausend.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.parndt.zehntausend.activities.GameActivity;
-import com.parndt.zehntausend.activities.HistoryActivity;
-import com.parndt.zehntausend.activities.NewGameActivity;
-import com.parndt.zehntausend.data.NoDataException;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.parndt.zehntausend.R;
+import com.parndt.zehntausend.Zehntausend;
 import com.parndt.zehntausend.data.ScoreLoader;
-import com.parndt.zehntausend.model.Constants;
 import com.parndt.zehntausend.model.GameState;
 
 public class MainActivity extends AppCompatActivity {
@@ -39,13 +36,9 @@ public class MainActivity extends AppCompatActivity {
      * see {@link ScoreLoader} for more information on loading the data
      */
     private void loadData() {
-        try {
-            resumeState = new ScoreLoader().load(getApplicationContext());
+        resumeState = Zehntausend.gameState;
 
-            if (resumeState.gameOver()) {
-                throw new NoDataException("Game already finished! ");
-            }
-        } catch (NoDataException e) {
+        if (!resumeState.isStarted()) {
             Button resumeButton = (Button) findViewById(R.id.resumeGameButton);
             resumeButton.setVisibility(View.GONE);
         }
@@ -60,7 +53,6 @@ public class MainActivity extends AppCompatActivity {
     /** called when the user clicks the resume button */
     public void resumeGame(View view) {
         Intent intent = new Intent(this, GameActivity.class);
-        intent.putExtra(Constants.GAME_STATE, resumeState);
         startActivity(intent);
     }
 

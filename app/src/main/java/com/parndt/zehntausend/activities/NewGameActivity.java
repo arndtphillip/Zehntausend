@@ -1,17 +1,16 @@
 package com.parndt.zehntausend.activities;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.EditText;
-
 import com.parndt.zehntausend.R;
+import com.parndt.zehntausend.Zehntausend;
 import com.parndt.zehntausend.adapters.PlayerNameAdapter;
-import com.parndt.zehntausend.model.Constants;
 import com.parndt.zehntausend.model.Player;
 
 import java.util.ArrayList;
@@ -49,10 +48,9 @@ public class NewGameActivity extends AppCompatActivity {
     public void startGame(View view) {
         replaceEmptyPlayers();
 
+        Zehntausend.gameState.start(players);
+
         Intent intent = new Intent(this, GameActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putParcelableArrayList(Constants.PLAYERS, players);
-        intent.putExtras(bundle);
         startActivity(intent);
 
         finish();

@@ -1,4 +1,4 @@
-package com.parndt.zehntausend;
+package com.parndt.zehntausend.adapters;
 
 import android.content.Context;
 
@@ -11,6 +11,7 @@ import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.parndt.zehntausend.R;
 import com.parndt.zehntausend.model.GameState;
 import com.parndt.zehntausend.model.PlayerScore;
 
