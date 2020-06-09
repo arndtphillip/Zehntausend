@@ -33,12 +33,8 @@ public class NewGameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_new_game);
 
         setSupportActionBar((Toolbar) findViewById(R.id.newGameToolbar));
-        // Get a support ActionBar corresponding to this toolbar
-        ActionBar ab = getSupportActionBar();
-
-        // Enable the Up button
-        ab.setDisplayHomeAsUpEnabled(true);
-
+        assert getSupportActionBar() != null;
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         RecyclerView recyclerView = findViewById(R.id.playerListView);
 

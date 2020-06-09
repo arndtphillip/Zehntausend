@@ -1,10 +1,11 @@
 package com.parndt.zehntausend.activities
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.RelativeLayout
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import com.github.mikephil.charting.charts.LineChart
 import com.parndt.zehntausend.R
 import com.parndt.zehntausend.adapters.ChartAdapter
@@ -16,6 +17,9 @@ class HistoryDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_history_detail)
+
+        setSupportActionBar(findViewById<View>(R.id.historyDetailToolbar) as Toolbar)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         val state = intent.getSerializableExtra(Constants.GAME_STATE) as GameState
         val chart = findViewById<LineChart>(R.id.pointsChart)
