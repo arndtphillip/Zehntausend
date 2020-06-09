@@ -16,14 +16,17 @@
             android:parentActivityName=".activities.HistoryActivity"/>
 
         <activity
-            android:name=".activities.GameEndActivity" />
+            android:name=".activities.GameEndActivity"
+            android:launchMode="singleTop"/>
 
         <activity
             android:name=".activities.HistoryActivity"
-            android:parentActivityName=".activities.MainActivity"/>
+            android:parentActivityName=".activities.MainActivity"
+            android:launchMode="singleTop"/>
 
         <activity
-            android:name=".activities.ChartActivity" />
+            android:name=".activities.ChartActivity"
+            android:parentActivityName=".activities.GameEndActivity"/>
 
         <activity
             android:name=".activities.GameActivity"
@@ -34,7 +37,8 @@
             android:parentActivityName=".activities.MainActivity"/>
 
         <activity
-            android:name=".activities.MainActivity">
+            android:name=".activities.MainActivity"
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -1,6 +1,7 @@
 package com.parndt.zehntausend.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
 import android.view.View;
@@ -17,6 +18,10 @@ public class ChartActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chart);
+
+        setSupportActionBar((Toolbar) findViewById(R.id.graphToolbar));
+        assert getSupportActionBar() != null;
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         GameState state = Zehntausend.gameState;
         LineChart chart = findViewById(R.id.pointsChart);

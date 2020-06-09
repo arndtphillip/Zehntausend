@@ -46,7 +46,7 @@ public class NewGameActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
     }
 
-        /** adds a new player */
+    /** adds a new player */
     public void addPlayer(View view) {
         players.add(new Player(""));
         adapter.notifyDataSetChanged();

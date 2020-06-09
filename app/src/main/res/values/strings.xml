@@ -20,4 +20,5 @@
     <string name="historyDetailWinner">"1st"</string>
     <string name="historyDetailSecond">"2nd"</string>
     <string name="historyDetailThird">3rd</string>
+    <string name="graph">Graph</string>
 </resources>
