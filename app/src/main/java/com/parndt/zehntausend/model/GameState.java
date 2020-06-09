@@ -54,7 +54,7 @@ public class GameState implements Serializable {
                 second = new PlayerScore(new Player("")),
                 third = new PlayerScore(new Player(""));
 
-        int firstScore = 0, secondScore = 0, thirdScore = 0;
+        int firstScore = -10000, secondScore = -10000, thirdScore = -10000;
 
         for (PlayerScore player : players) {
             int points = player.getPointsSum();

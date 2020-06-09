@@ -61,7 +61,7 @@
 
                         <TextView
                             android:id="@+id/winnerLabel"
-                            android:layout_width="wrap_content"
+                            android:layout_width="32dp"
                             android:layout_height="wrap_content"
                             android:text="@string/historyDetailWinner"
                             android:layout_alignParentStart="true"/>
@@ -80,8 +80,7 @@
                             android:layout_toEndOf="@id/winnerLabel"
                             android:layout_toStartOf="@id/winnerPoints"
                             android:layout_marginStart="24dp"
-                            android:text="Philipp"
-                            android:textAlignment="center" />
+                            android:text="Philipp" />
 
                     </RelativeLayout>
 
@@ -92,7 +91,7 @@
 
                         <TextView
                             android:id="@+id/secondLabel"
-                            android:layout_width="wrap_content"
+                            android:layout_width="32dp"
                             android:layout_height="wrap_content"
                             android:text="@string/historyDetailSecond"
                             android:layout_alignParentStart="true"/>
@@ -111,8 +110,7 @@
                             android:layout_toEndOf="@id/secondLabel"
                             android:layout_toStartOf="@id/secondPoints"
                             android:layout_marginStart="24dp"
-                            android:text="Philipp"
-                            android:textAlignment="center"/>
+                            android:text="Philipp"/>
 
                     </RelativeLayout>
 
@@ -124,7 +122,7 @@
 
                         <TextView
                             android:id="@+id/thirdLabel"
-                            android:layout_width="wrap_content"
+                            android:layout_width="32dp"
                             android:layout_height="wrap_content"
                             android:text="@string/historyDetailThird"
                             android:layout_alignParentStart="true"/>
@@ -143,8 +141,7 @@
                             android:layout_toEndOf="@id/thirdLabel"
                             android:layout_toStartOf="@id/thirdPoints"
                             android:layout_marginStart="24dp"
-                            android:text="Philipp"
-                            android:textAlignment="center" />
+                            android:text="Philipp" />
 
                     </RelativeLayout>
 
