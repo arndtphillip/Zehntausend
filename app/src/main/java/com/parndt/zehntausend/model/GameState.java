@@ -96,6 +96,8 @@ public class GameState implements Serializable {
     }
 
     public void start(List<Player> players) {
+        this.players = new ArrayList<>();
+        
         for (Player player : players) {
             this.players.add(new PlayerScore(player));
         }
