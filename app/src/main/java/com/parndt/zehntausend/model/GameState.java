@@ -38,11 +38,6 @@ public class GameState implements Serializable {
         return test;
     }
 
-    public long duration() {
-        long diffInMillies = dateEnd.getTime() - dateStart.getTime();
-        return TimeUnit.MINUTES.convert(diffInMillies, TimeUnit.MILLISECONDS);
-    }
-
     public String getDuration() {
         long diffInMillies = dateEnd.getTime() - dateStart.getTime();
         return TimeUnit.MINUTES.convert(diffInMillies, TimeUnit.MILLISECONDS) + " min";

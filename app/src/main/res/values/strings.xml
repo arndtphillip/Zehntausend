@@ -21,4 +21,6 @@
     <string name="historyDetailSecond">"2nd"</string>
     <string name="historyDetailThird">3rd</string>
     <string name="graph">Graph</string>
+    <string name="date">01.01.2020</string>
+    <string name="duration">60 min</string>
 </resources>

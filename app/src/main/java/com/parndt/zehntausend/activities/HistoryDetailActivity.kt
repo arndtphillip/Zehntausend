@@ -26,6 +26,13 @@ class HistoryDetailActivity : AppCompatActivity() {
 
         ChartAdapter(state, chart, applicationContext).adapt()
 
+        setTexts(state)
+    }
+
+    fun setTexts(state: GameState) {
+        findViewById<TextView>(R.id.historyDetailDate).text = state.date
+        findViewById<TextView>(R.id.historyDetailDuration).text = state.duration
+
         val winners = state.winners
 
         findViewById<TextView>(R.id.winnerName).text = winners[0].player.name
