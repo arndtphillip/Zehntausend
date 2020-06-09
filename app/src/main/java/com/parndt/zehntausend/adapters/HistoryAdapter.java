@@ -1,6 +1,5 @@
 package com.parndt.zehntausend.adapters;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -9,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.core.app.ActivityOptionsCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.parndt.zehntausend.R;
@@ -40,7 +38,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryV
         int currentGame = history.getGames().size() - 1 - position;
         final GameState game = history.getGames().get(currentGame);
 
-        holder.winnerText.setText(String.format("Winner: %s", game.getWinner().getName()));
+        holder.winnerText.setText(String.format("Winner: %s", game.getWinners().get(0).getPlayer().getName()));
         holder.dateText.setText(game.getDate());
         holder.durationText.setText(game.getDuration());
 

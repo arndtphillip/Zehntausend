@@ -47,20 +47,48 @@ public class GameState implements Serializable {
         return isStarted;
     }
 
-    public Player getWinner() {
-        Player winner = null;
-        int highscore = 10000;
+    public List<PlayerScore> getWinners() {
+        if (!gameOver()) return new ArrayList<>();
 
-        if (gameOver()) {
-            for (PlayerScore player : players) {
-                if (player.getPointsSum() >= highscore) {
-                    winner = player.getPlayer();
-                    highscore = player.getPointsSum();
-                }
+        PlayerScore first = new PlayerScore(new Player("")),
+                second = new PlayerScore(new Player("")),
+                third = new PlayerScore(new Player(""));
+
+        int firstScore = 0, secondScore = 0, thirdScore = 0;
+
+        for (PlayerScore player : players) {
+            int points = player.getPointsSum();
+            if (points > firstScore) {
+                third = second;
+                thirdScore = secondScore;
+
+                second = first;
+                secondScore = firstScore;
+
+                first = player;
+                firstScore = points;
+            } else if (points > secondScore) {
+                third = second;
+                thirdScore = secondScore;
+
+                second = player;
+                secondScore = points;
+            } else if (points > thirdScore) {
+                third = player;
+                thirdScore = points;
             }
         }
 
-        return winner;
+        List<PlayerScore> result = new ArrayList<>();
+
+        result.add(first);
+        result.add(second);
+
+        if (!third.getPlayer().getName().isEmpty()) {
+            result.add(third);
+        }
+
+        return result;
     }
 
     public GameState() {

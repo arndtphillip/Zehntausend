@@ -9,12 +9,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.parndt.zehntausend.R;
 import com.parndt.zehntausend.Zehntausend;
-import com.parndt.zehntausend.data.ScoreLoader;
 import com.parndt.zehntausend.model.GameState;
 
 public class MainActivity extends AppCompatActivity {
-
-    private GameState resumeState;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,17 +23,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        // we need to reload the data every time the user comes back to the main activity
-        loadData();
+        setVisibilities();
     }
 
-    /**
-     * loads the data of the most recent unfinished game into memory
-     * hides the resume button if there is no unfinished game
-     * see {@link ScoreLoader} for more information on loading the data
-     */
-    private void loadData() {
-        resumeState = Zehntausend.gameState;
+    private void setVisibilities() {
+        GameState resumeState = Zehntausend.gameState;
 
         if (!resumeState.isStarted()) {
             Button resumeButton = (Button) findViewById(R.id.resumeGameButton);

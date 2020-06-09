@@ -26,7 +26,7 @@ public class GameEndActivity extends AppCompatActivity {
 
         TextView winnerText = findViewById(R.id.textWinner);
 
-        winnerText.setText(game.getWinner().getName() + " won!");
+        winnerText.setText(game.getWinners().get(0).getPlayer().getName() + " won!");
 
         Animation translate = AnimationUtils.loadAnimation(this, R.anim.translate_top_to_bottom);
         findViewById(R.id.winnerCard).startAnimation(translate);
