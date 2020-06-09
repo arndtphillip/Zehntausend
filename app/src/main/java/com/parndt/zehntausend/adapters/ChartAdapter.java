@@ -25,7 +25,10 @@ public class ChartAdapter {
             R.color.colorChart2,
             R.color.colorChart3,
             R.color.colorChart4,
-            R.color.colorChart5
+            R.color.colorChart5,
+            R.color.colorChart6,
+            R.color.colorChart7,
+            R.color.colorChart8
     };
 
     private GameState state;
