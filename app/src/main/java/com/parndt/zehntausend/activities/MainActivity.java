@@ -29,9 +29,11 @@ public class MainActivity extends AppCompatActivity {
     private void setVisibilities() {
         GameState resumeState = Zehntausend.gameState;
 
+        Button resumeButton = (Button) findViewById(R.id.resumeGameButton);
         if (!resumeState.isStarted()) {
-            Button resumeButton = (Button) findViewById(R.id.resumeGameButton);
             resumeButton.setVisibility(View.GONE);
+        } else {
+            resumeButton.setVisibility(View.VISIBLE);
         }
     }
 
