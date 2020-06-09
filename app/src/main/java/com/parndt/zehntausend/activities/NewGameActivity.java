@@ -2,9 +2,12 @@ package com.parndt.zehntausend.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -28,6 +31,15 @@ public class NewGameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_game);
+
+        setSupportActionBar((Toolbar) findViewById(R.id.newGameToolbar));
+        // Get a support ActionBar corresponding to this toolbar
+        ActionBar ab = getSupportActionBar();
+
+        // Enable the Up button
+        ab.setDisplayHomeAsUpEnabled(true);
+
+
         RecyclerView recyclerView = findViewById(R.id.playerListView);
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
@@ -38,7 +50,7 @@ public class NewGameActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
     }
 
-    /** adds a new player */
+        /** adds a new player */
     public void addPlayer(View view) {
         players.add(new Player(""));
         adapter.notifyDataSetChanged();

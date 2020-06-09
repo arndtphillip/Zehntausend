@@ -1,47 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
 
-    <RelativeLayout
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/newGameToolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        style="@style/ToolBarStyle"
+        app:title="@string/new_game"/>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/playerListView"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_marginVertical="8dp"/>
+            android:layout_height="wrap_content">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_below="@id/playerListView"
-            android:layout_marginHorizontal="16dp">
-
-            <Button
-                android:id="@+id/button2"
-                android:layout_width="0dp"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/playerListView"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginEnd="8dp"
-                style="?android:attr/buttonBarButtonStyle"
-                android:onClick="addPlayer"
-                android:text="@string/add_player"/>
+                android:layout_alignParentTop="true"
+                android:layout_marginVertical="8dp"/>
 
-            <Button
-                android:id="@+id/startGameButton"
-                android:layout_width="0dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginStart="8dp"
-                style="?android:attr/buttonBarButtonStyle"
-                android:onClick="startGame"
-                android:text="@string/start_game" />
-        </LinearLayout>
+                android:orientation="horizontal"
+                android:layout_below="@id/playerListView"
+                android:layout_marginHorizontal="16dp">
 
-    </RelativeLayout>
+                <Button
+                    android:id="@+id/button2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="8dp"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:onClick="addPlayer"
+                    android:text="@string/add_player"/>
 
-</ScrollView>
+                <Button
+                    android:id="@+id/startGameButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:onClick="startGame"
+                    android:text="@string/start_game" />
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </ScrollView>
+</LinearLayout>
