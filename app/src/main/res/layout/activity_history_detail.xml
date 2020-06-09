@@ -12,7 +12,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         style="@style/ToolBarStyle"
-        app:title="@string/history"/>
+        app:title="@string/history"
+        android:transitionName="historyActionBar"/>
 
     <ScrollView
         android:layout_width="match_parent"

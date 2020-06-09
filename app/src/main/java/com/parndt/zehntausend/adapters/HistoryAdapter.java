@@ -1,5 +1,6 @@
 package com.parndt.zehntausend.adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -8,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityOptionsCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.parndt.zehntausend.R;
@@ -19,9 +22,11 @@ import com.parndt.zehntausend.model.History;
 public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryViewHolder> {
 
     private History history;
+    private View toolbar;
 
-    public HistoryAdapter(History history) {
+    public HistoryAdapter(History history, Toolbar toolbar) {
         this.history = history;
+        this.toolbar = toolbar;
     }
 
     @NonNull
@@ -49,7 +54,8 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryV
                 Context context = v.getContext();
                 Intent intent = new Intent(context, HistoryDetailActivity.class);
                 intent.putExtra(Constants.GAME_STATE, game);
-                context.startActivity(intent);
+                ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) context, toolbar,"historyActionBar");
+                context.startActivity(intent, activityOptionsCompat.toBundle());
             }
         });
     }
