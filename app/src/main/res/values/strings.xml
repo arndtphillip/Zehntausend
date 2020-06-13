@@ -23,4 +23,5 @@
     <string name="graph">Graph</string>
     <string name="date">01.01.2020</string>
     <string name="duration">60 min</string>
+    <string name="points">10000</string>
 </resources>

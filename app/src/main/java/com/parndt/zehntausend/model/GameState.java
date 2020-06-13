@@ -33,9 +33,12 @@ public class GameState implements Serializable {
 
     public String getDate() {
         SimpleDateFormat formatter = new SimpleDateFormat("LLL d yyyy, kk:mm", Locale.UK);
-        String test = formatter.format(dateStart);
+        return formatter.format(dateStart);
+    }
 
-        return test;
+    public String getDateShort() {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy", Locale.UK);
+        return formatter.format(dateStart);
     }
 
     public String getDuration() {
