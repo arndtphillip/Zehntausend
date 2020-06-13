@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.parndt.zehntausend.R;
@@ -25,6 +24,7 @@ public class GameActivity extends AppCompatActivity {
     private RecyclerView.Adapter headerAdapter;
     private RecyclerView.Adapter scoreAdapter;
 
+    private RecyclerView scoreView;
     private EditText pointsText;
 
     // this is needed to be able to scroll the recycler view to the bottom
@@ -41,12 +41,16 @@ public class GameActivity extends AppCompatActivity {
             scoreViewPosition += player.getPoints().size();
         }
 
+        scoreView = findViewById(R.id.tableScores);
+        pointsText = findViewById(R.id.pointsText);
+
         setHeaderAdapter();
         setScoreAdapter();
 
         dataChanged();
 
-        pointsText = findViewById(R.id.pointsText);
+        // scroll scoreView to bottom
+        scoreView.scrollToPosition(scoreViewPosition);
 
         // add score on enter
         pointsText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -66,7 +70,6 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void setScoreAdapter() {
-        RecyclerView scoreView = findViewById(R.id.tableScores);
         scoreView.setLayoutManager(new GridLayoutManager(this, state.getPlayers().size()));
         scoreAdapter = new PlayerScoreAdapter(state.getPlayers());
         scoreView.setAdapter(scoreAdapter);
@@ -89,11 +92,7 @@ public class GameActivity extends AppCompatActivity {
             state.addScore(Integer.parseInt(pointsText.getText().toString()));
 
             dataChanged();
-            RecyclerView scoreView = findViewById(R.id.tableScores);
             scoreView.scrollToPosition(scoreViewPosition);
-
-            ScrollView scroll = findViewById(R.id.scoreScrollView);
-            scroll.scrollTo(0, scroll.getBottom());
         } catch (NumberFormatException e) {
             e.printStackTrace();
         }

@@ -12,19 +12,12 @@
         android:background="@color/white"
         android:layout_alignParentTop="true"/>
 
-    <ScrollView
-        android:id="@+id/scoreScrollView"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/tableScores"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/scoreHeader"
-        android:layout_above="@id/GameActions">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/tableScores"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            />
-    </ScrollView>
+        android:layout_above="@id/GameActions"/>
 
     <RelativeLayout
         android:id="@+id/GameActions"

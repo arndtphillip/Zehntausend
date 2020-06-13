@@ -53,6 +53,9 @@ public class NewGameActivity extends AppCompatActivity {
     public void addPlayer(View view) {
         players.add(new Player(""));
         adapter.notifyDataSetChanged();
+
+        RecyclerView playerNames = findViewById(R.id.playerListView);
+        playerNames.scrollToPosition(players.size() - 1);
     }
 
     /** starts the game with the entered players */

@@ -13,27 +13,13 @@
         style="@style/ToolBarStyle"
         app:title="@string/new_game"/>
 
-    <ScrollView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/playerListView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/newGameToolbar"
-        android:layout_above="@id/newGameControls">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/playerListView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginVertical="8dp"/>
-
-
-        </RelativeLayout>
-
-    </ScrollView>
+        android:layout_height="wrap_content"
+        android:layout_above="@id/newGameControls"
+        android:layout_below="@+id/newGameToolbar"
+        android:layout_marginVertical="8dp"/>
 
     <LinearLayout
         android:id="@+id/newGameControls"
