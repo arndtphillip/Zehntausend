@@ -57,9 +57,9 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryV
                 Context context = v.getContext();
                 Intent intent = new Intent(context, HistoryDetailActivity.class);
                 intent.putExtra(Constants.GAME_STATE, game);
-                //ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) context, toolbar,"historyActionBar");
-                //context.startActivity(intent, activityOptionsCompat.toBundle());
-                context.startActivity(intent);
+                ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) context, toolbar,"historyActionBar");
+                context.startActivity(intent, activityOptionsCompat.toBundle());
+                //context.startActivity(intent);
             }
         });
     }

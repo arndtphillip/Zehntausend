@@ -28,7 +28,7 @@ public class GameActivity extends AppCompatActivity {
     private EditText pointsText;
 
     // this is needed to be able to scroll the recycler view to the bottom
-    private int scoreViewPosition = 2;
+    private int scoreViewPosition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +36,8 @@ public class GameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_game);
 
         state = Zehntausend.gameState;
+
+        scoreViewPosition = state.getPlayers().size();
 
         for (PlayerScore player : state.getPlayers()) {
             scoreViewPosition += player.getPoints().size();

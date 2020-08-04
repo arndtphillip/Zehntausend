@@ -110,6 +110,8 @@ public class GameState implements Serializable {
         turnsLeft = players.size();
 
         isStarted = true;
+        tenThousandReached = false;
+        playerTurns = 0;
     }
 
     public void addScore(int points) {
